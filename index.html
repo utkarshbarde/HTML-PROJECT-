@@ -1,243 +1,1432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>TuteDude - HTML Learning Demo Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TuteDude — Taco Truck U</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --cream:#FAF3E7;
+  --teal:#1F4E4C;
+  --teal-dark:#123331;
+  --chili:#C1432E;
+  --mustard:#E3A72F;
+  --charcoal:#241C15;
+  --line:rgba(36,28,20,0.14);
+  --radius:14px;
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--charcoal);
+  font-family:'Inter',sans-serif;
+  line-height:1.6;
+}
+
+h1,h2,h3{
+  font-family:'Fraunces',serif;
+  margin:0 0 .4em;
+  color:var(--teal-dark);
+}
+
+h1{font-weight:900;}
+h2{font-weight:700;}
+
+a{color:var(--chili);}
+
+code,.mono{
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* HEADER */
+header{
+  background:var(--teal);
+  color:var(--cream);
+  padding:1.4rem 1.2rem 0;
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  font-family:'Fraunces',serif;
+  font-weight:900;
+  font-size:1.3rem;
+  color:var(--cream);
+}
+
+.brand span.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--mustard);
+  display:inline-block;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:1.1rem;
+  margin:0;
+  padding:0;
+  flex-wrap:wrap;
+}
+
+nav a{
+  color:var(--cream);
+  text-decoration:none;
+  font-weight:600;
+  font-size:.92rem;
+  padding-bottom:3px;
+  border-bottom:2px solid transparent;
+  transition:border-color .2s ease,color .2s ease;
+}
+
+nav a:hover,
+nav a:focus-visible{
+  border-color:var(--mustard);
+  color:var(--mustard);
+}
+
+#nav-toggle{
+  display:none;
+  background:none;
+  border:1px solid rgba(250,243,231,.4);
+  color:var(--cream);
+  border-radius:8px;
+  padding:.4rem .6rem;
+  font-size:1rem;
+}
+
+.hero-copy{
+  max-width:1100px;
+  margin:1.4rem auto 0;
+  padding-bottom:1.6rem;
+}
+
+.hero-copy h1{
+  color:var(--cream);
+  font-size:clamp(2rem,5vw,3.2rem);
+  max-width:700px;
+}
+
+.hero-copy p{
+  max-width:620px;
+  color:rgba(250,243,231,.88);
+}
+
+.hero-copy mark{
+  background:var(--mustard);
+  color:var(--teal-dark);
+  padding:0 .2em;
+  border-radius:4px;
+}
+
+figure.hero-figure{
+  margin:0 auto;
+  max-width:1100px;
+}
+
+figure.hero-figure img{
+  width:100%;
+  max-height:340px;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+
+figcaption{
+  background:var(--teal-dark);
+  color:rgba(250,243,231,.75);
+  font-size:.82rem;
+  padding:.5rem 1rem;
+  text-align:right;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* LAYOUT */
+main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:2.4rem 1.2rem;
+}
+
+section{
+  margin-bottom:3.2rem;
+}
+
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.72rem;
+  color:var(--chili);
+  font-weight:600;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.4rem 1.5rem;
+}
+
+blockquote{
+  margin:1.2rem 0;
+  padding:1rem 1.4rem;
+  border-left:4px solid var(--mustard);
+  background:rgba(227,167,47,.1);
+  font-style:italic;
+  font-family:'Fraunces',serif;
+  font-size:1.1rem;
+}
+
+blockquote cite{
+  display:block;
+  margin-top:.5rem;
+  font-style:normal;
+  font-family:'Inter',sans-serif;
+  font-size:.82rem;
+  color:var(--teal);
+}
+
+/* TABLES */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin:1rem 0;
+  font-size:.92rem;
+}
+
+thead th{
+  background:var(--teal);
+  color:var(--cream);
+  text-align:left;
+  padding:.6rem .7rem;
+}
+
+tbody td,
+tbody th{
+  padding:.6rem .7rem;
+  border-bottom:1px solid var(--line);
+  vertical-align:top;
+}
+
+tbody tr:nth-child(even){
+  background:rgba(31,78,76,.04);
+}
+
+tfoot td{
+  padding:.6rem .7rem;
+  font-weight:600;
+  background:rgba(227,167,47,.16);
+}
+
+table.nested{
+  margin:.4rem 0 0;
+  font-size:.8rem;
+}
+
+table.nested th{
+  background:var(--teal-dark);
+  padding:.35rem .5rem;
+}
+
+table.nested td{
+  padding:.35rem .5rem;
+}
+
+.menu-item-btn{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  background:var(--teal);
+  color:var(--cream);
+  border:none;
+  border-radius:6px;
+  padding:.3rem .6rem;
+  cursor:pointer;
+}
+
+.menu-item-btn.added{
+  background:var(--chili);
+}
+
+/* TRIVIA */
+.trivia-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:1.4rem;
+}
+
+aside.trivia-box{
+  background:var(--teal-dark);
+  color:var(--cream);
+  border-radius:var(--radius);
+  padding:1.2rem 1.3rem;
+}
+
+aside.trivia-box h3{
+  color:var(--mustard);
+}
+
+details{
+  border-top:1px solid rgba(250,243,231,.18);
+  padding:.6rem 0;
+}
+
+details:first-of-type{
+  border-top:none;
+}
+
+summary{
+  cursor:pointer;
+  font-weight:600;
+  color:var(--cream);
+}
+
+summary::marker{
+  color:var(--mustard);
+}
+
+#trivia-count{
+  font-family:'JetBrains Mono',monospace;
+  color:var(--mustard);
+}
+
+/* MEDIA */
+.media-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.2rem;
+}
+
+video,
+audio{
+  width:100%;
+  border-radius:10px;
+}
+
+/* ORDER TICKET */
+#order-ticket{
+  position:sticky;
+  top:1rem;
+}
+
+#order-ticket .ticket-inner{
+  background:#fff;
+  border:1px dashed var(--charcoal);
+  border-radius:10px;
+  padding:1rem 1.1rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.84rem;
+}
+
+#order-ticket h4{
+  margin:0 0 .5rem;
+  font-family:'Fraunces',serif;
+  font-size:1rem;
+}
+
+#ticket-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  min-height:1.4rem;
+}
+
+#ticket-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:.15rem 0;
+}
+
+#ticket-total{
+  display:flex;
+  justify-content:space-between;
+  border-top:1px dashed var(--charcoal);
+  margin-top:.5rem;
+  padding-top:.5rem;
+  font-weight:700;
+}
+
+#ticket-empty{
+  color:#8a8378;
+}
+
+/* FORM */
+form fieldset{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:1.1rem 1.2rem 1.3rem;
+  margin-bottom:1rem;
+}
+
+legend{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+  padding:0 .4rem;
+  color:var(--teal-dark);
+}
+
+label{
+  display:block;
+  font-size:.86rem;
+  font-weight:600;
+  margin:.7rem 0 .3rem;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:.55rem .7rem;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-family:inherit;
+  font-size:.92rem;
+  background:#fff;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible{
+  outline:3px solid var(--mustard);
+  outline-offset:1px;
+}
+
+button.submit-btn{
+  background:var(--chili);
+  color:#fff;
+  border:none;
+  padding:.7rem 1.4rem;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:1rem;
+}
+
+button.submit-btn:hover{
+  background:#a3361f;
+}
+
+#form-status{
+  margin-top:.8rem;
+  font-weight:600;
+  display:none;
+}
+
+#form-status.show{
+  display:block;
+}
+
+/* FOOTER */
+footer{
+  background:var(--charcoal);
+  color:rgba(250,243,231,.82);
+  padding:2rem 1.2rem 1.4rem;
+}
+
+footer .foot-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:1.2rem;
+}
+
+address{
+  font-style:normal;
+  font-size:.9rem;
+  line-height:1.8;
+}
+
+footer small{
+  display:block;
+  margin-top:1.2rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.76rem;
+  color:rgba(250,243,231,.5);
+}
+
+.skip-link{
+  position:absolute;
+  left:-999px;
+  top:auto;
+  background:var(--mustard);
+  color:var(--charcoal);
+  padding:.6rem 1rem;
+  z-index:100;
+}
+
+.skip-link:focus{
+  left:1rem;
+  top:1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width:820px){
+  nav ul{
+    display:none;
+    flex-direction:column;
+    background:var(--teal-dark);
+    position:absolute;
+    left:1.2rem;
+    right:1.2rem;
+    top:4.2rem;
+    padding:1rem 1.2rem;
+    border-radius:10px;
+    z-index:20;
+  }
+
+  nav ul.open{
+    display:flex;
+  }
+
+  #nav-toggle{
+    display:inline-block;
+  }
+}
+
+@media (max-width:760px){
+  .trivia-grid,
+  .media-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
+<a class="skip-link" href="#main-content">Skip to content</a>
+
 <header>
-    <h1>🌮 Welcome to <mark>TuteDude</mark> 🌮</h1>
-    <p><em>A project designed by <strong>TuteDude</strong> to learn HTML</em></p>
-    <p>Best TuteDude in town since <time datetime="2021">2021</time></p>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About TD</a></li>
-            <li><a href="#menu">Our Menu</a></li>
-            <li><a href="#trivia">Taco Trivia</a></li>
-            <li><a href="#extras">Extras</a></li>
-            <li><a href="#feedback">Feedback Form</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+  <div class="brand-row">
+    <div class="brand">
+      <span class="dot"></span>
+      TuteDude
+    </div>
+
+    <button id="nav-toggle"
+            aria-expanded="false"
+            aria-controls="site-nav">
+      ☰ Menu
+    </button>
+
+    <nav id="site-nav">
+      <ul>
+        <li><a href="#about">About TD</a></li>
+        <li><a href="#menu">Our Menu</a></li>
+        <li><a href="#trivia">Taco Trivia</a></li>
+        <li><a href="#extras">Extras</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+  </div>
 
-    <figure id="top">
-        <svg xmlns="http://www.w3.org/2000/svg" width="450" height="300" viewBox="0 0 450 300" role="img" aria-label="TuteDude Course Banner">
-            <rect width="450" height="300" fill="#FBEBD8"/>
-            <g stroke="#5B21B6" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round">
-                <path d="M60 70 Q100 55 140 70 L140 150 Q100 135 60 150 Z"/>
-                <path d="M220 70 Q180 55 140 70 L140 150 Q180 135 220 150 Z"/>
-                <line x1="140" y1="70" x2="140" y2="150"/>
-            </g>
-            <circle cx="60" cy="108" r="6" fill="#5B21B6"/>
-            <circle cx="220" cy="108" r="6" fill="#5B21B6"/>
-            <text x="240" y="95" font-family="Verdana, sans-serif" font-size="42" font-weight="bold" fill="#5B21B6">TuteDude</text>
-            <text x="240" y="150" font-family="Verdana, sans-serif" font-size="46" font-weight="bold" fill="#F97316">COURSE</text>
-            <g>
-                <rect x="60" y="200" width="90" height="60" rx="4" fill="#374151"/>
-                <rect x="70" y="210" width="70" height="40" fill="#93C5FD"/>
-                <circle cx="45" cy="220" r="18" fill="#F59E0B"/>
-                <rect x="20" y="238" width="60" height="45" rx="6" fill="#16A34A"/>
-                <rect x="10" y="255" width="220" height="10" fill="#A16207"/>
-                <rect x="180" y="235" width="16" height="30" fill="#DC2626"/>
-            </g>
-        </svg>
-        <figcaption>TuteDude and a Drink</figcaption>
-    </figure>
+  <div class="hero-copy">
+    <h1>
+      Learn HTML the <mark>way tacos are built</mark> —
+      layer by layer.
+    </h1>
+
+    <p>
+      <em>TuteDude</em> is a
+      <strong>fictional taco-truck-turned-classroom</strong>
+      built to demo every major HTML tag in one working page —
+      semantic structure, tables, media, and a real feedback form.
+    </p>
+  </div>
+
+  <figure class="hero-figure">
+    <img
+      src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=1200&h=500&fit=crop"
+      alt="Street tacos being assembled on a griddle">
+
+    <figcaption>
+      fig.1 — the TuteDude griddle, mid-lesson
+    </figcaption>
+  </figure>
+
 </header>
 
-<main>
+<main id="main-content">
 
-    <section id="about">
-        <h2>About TD</h2>
-        <article>
-            <p><abbr title="TuteDude">TD</abbr> was founded in <time datetime="2021">2021</time>. This demo project was created by <strong>TuteDude</strong> for learning all major HTML tags 🌮.</p>
-            <p>Level up your career with expert mentorship &amp; internships for FREE.</p>
-        </article>
-    </section>
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-h">
 
-    <section id="menu">
-        <h2>Our Menu</h2>
+    <p class="eyebrow">01 / About</p>
 
-        <table border="1">
-            <caption>TuteDude Complete Taco Menu</caption>
-            <thead>
-                <tr>
-                    <th rowspan="2">Category</th>
-                    <th rowspan="2">Type</th>
-                    <th colspan="2">Small Portion</th>
-                    <th colspan="2">Large Portion</th>
-                </tr>
-                <tr>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td rowspan="3">TuteDude</td>
-                    <td>Crunchy (Beef)</td>
-                    <td>1</td>
-                    <td>$1.50</td>
-                    <td>3</td>
-                    <td>$3.25</td>
-                </tr>
-                <tr>
-                    <td>Crunchy (Chicken)</td>
-                    <td>1</td>
-                    <td>$1.75</td>
-                    <td>3</td>
-                    <td>$3.50</td>
-                </tr>
-                <tr>
-                    <td>
-                        Crunchy (Veggie)
-                        <table border="1">
-                            <caption>Nutrition Info</caption>
-                            <tr><th>Nutrient</th><th>Value</th></tr>
-                            <tr><td>Calories</td><td>150 kcal</td></tr>
-                            <tr><td>Protein</td><td>5 g</td></tr>
-                            <tr><td>Fiber</td><td>4 g</td></tr>
-                        </table>
-                    </td>
-                    <td>1</td>
-                    <td>$1.25</td>
-                    <td>3</td>
-                    <td>$3.00</td>
-                </tr>
+    <h2 id="about-h">About TD</h2>
 
-                <tr>
-                    <td rowspan="2">Soft TuteDude</td>
-                    <td>Soft (Beef)</td>
-                    <td>2</td>
-                    <td>$3.50</td>
-                    <td>4</td>
-                    <td>$6.50</td>
-                </tr>
-                <tr>
-                    <td>Soft (Veggie)</td>
-                    <td>2</td>
-                    <td>$3.00</td>
-                    <td>4</td>
-                    <td>$5.50</td>
-                </tr>
+    <article class="card">
 
-                <tr>
-                    <td rowspan="2">Combos</td>
-                    <td>2 Crunchy + Drink</td>
-                    <td colspan="4">$4.50</td>
-                </tr>
-                <tr>
-                    <td>
-                        2 Soft + Drink
-                        <table border="1">
-                            <caption>Combo Meals Nutrition Facts</caption>
-                            <tr><th>Item</th><th>Calories</th><th>Sugar</th></tr>
-                            <tr><td>Soft Taco</td><td>200 kcal</td><td>2 g</td></tr>
-                            <tr><td>Drink</td><td>120 kcal</td><td>25 g</td></tr>
-                            <tr><td>Total</td><td>320 kcal</td><td>27 g</td></tr>
-                        </table>
-                    </td>
-                    <td colspan="4">$5.00</td>
-                </tr>
+      <p>
+        <abbr title="TuteDude">TD</abbr> was founded in
+        <time datetime="2021">2021</time> as a
+        <strong>demo project</strong> for learning every major HTML tag,
+        wrapped in the story of a taco truck that moonlights as a classroom.
 
-                <tr>
-                    <td rowspan="2">Extras</td>
-                    <td>Chips &amp; Salsa</td>
-                    <td colspan="4">$2.00</td>
-                </tr>
-                <tr>
-                    <td>Guacamole</td>
-                    <td colspan="4">$1.50</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6">Average Meal Price Range: $2.00 &ndash; $6.50</td>
-                </tr>
-            </tfoot>
-        </table>
+        <strong>Level up your career</strong>
+        with expert mentorship &amp; internships — for free.
+      </p>
 
-        <p><a href="#top">Back to Top</a></p>
-    </section>
+      <blockquote>
+        A good taco and a good &lt;article&gt; tag have the same secret:
+        everything is exactly where it belongs, and nothing is wasted.
 
-    <section id="trivia">
-        <h2>Taco Trivia</h2>
-        <aside>
-            <details>
-                <summary>When did TuteDude first appear in the United States?</summary>
-                <p>TuteDude style tacos are believed to have first appeared in the United States in the early 1900s, brought over by Mexican immigrants.</p>
-            </details>
-            <details>
-                <summary>What is the most popular taco filling?</summary>
-                <p>Beef remains the most popular taco filling across the United States, followed closely by chicken.</p>
-            </details>
-        </aside>
-    </section>
+        <cite>
+          — Line cook's notebook, TuteDude kitchen
+        </cite>
+      </blockquote>
 
-    <section id="extras">
-        <h2>Extras</h2>
-        <h3>Media Fun</h3>
+    </article>
 
-        <h4>Listen to Taco Music</h4>
-        <audio controls>
-            <source src="taco-music.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
+  </section>
 
-        <h4>Watch Taco Video</h4>
-        <video controls width="350">
-            <source src="taco-video.mp4" type="video/mp4">
-            Your browser does not support the video element.
-        </video>
-    </section>
+  <!-- MENU -->
+  <section id="menu" aria-labelledby="menu-h">
 
-    <section id="feedback">
-        <h2>Give Us Your Feedback</h2>
-        <form action="#" method="post">
-            <fieldset>
-                <legend>Your Info</legend>
+    <p class="eyebrow">02 / Menu</p>
 
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name"><br><br>
+    <h2 id="menu-h">Our Menu</h2>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email"><br><br>
+    <div class="card">
 
-                <label for="favtaco">Favorite Taco:</label>
-                <select id="favtaco" name="favtaco">
-                    <option value="crunchy">Crunchy</option>
-                    <option value="soft">Soft</option>
-                    <option value="veggie">Veggie</option>
-                </select>
-            </fieldset>
+      <table>
 
-            <fieldset>
-                <legend>Your Message</legend>
-                <label for="message">Message:</label><br>
-                <textarea id="message" name="message" rows="5" cols="40"></textarea>
-            </fieldset>
+        <caption
+          class="mono"
+          style="text-align:left;caption-side:top;color:var(--teal);font-size:.8rem;margin-bottom:.4rem;">
+          TuteDude Complete Taco Menu
+        </caption>
 
-            <br>
-            <input type="submit" value="Submit">
-        </form>
-    </section>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Small</th>
+            <th>Large</th>
+            <th>Add</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>Classic</td>
+
+            <td>
+              Al Pastor
+
+              <details style="border:none;padding:.2rem 0;">
+
+                <summary style="color:var(--teal);font-size:.78rem;">
+                  Nutrition
+                </summary>
+
+                <table class="nested">
+                  <thead>
+                    <tr>
+                      <th>Cal</th>
+                      <th>Protein</th>
+                      <th>Carbs</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>210</td>
+                      <td>14g</td>
+                      <td>18g</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </details>
+            </td>
+
+            <td>$3.50</td>
+            <td>$5.00</td>
+
+            <td>
+              <button
+                class="menu-item-btn"
+                data-name="Al Pastor"
+                data-price="3.50">
+                + Add $3.50
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Classic</td>
+
+            <td>
+              Carne Asada
+
+              <details style="border:none;padding:.2rem 0;">
+
+                <summary style="color:var(--teal);font-size:.78rem;">
+                  Nutrition
+                </summary>
+
+                <table class="nested">
+                  <thead>
+                    <tr>
+                      <th>Cal</th>
+                      <th>Protein</th>
+                      <th>Carbs</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>240</td>
+                      <td>17g</td>
+                      <td>16g</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </details>
+            </td>
+
+            <td>$3.75</td>
+            <td>$5.25</td>
+
+            <td>
+              <button
+                class="menu-item-btn"
+                data-name="Carne Asada"
+                data-price="3.75">
+                + Add $3.75
+              </button>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Veg</td>
+
+            <td>
+              Grilled Veggie
+
+              <details style="border:none;padding:.2rem 0;">
+
+                <summary style="color:var(--teal);font-size:.78rem;">
+                  Nutrition
+                </summary>
+
+                <table class="nested">
+                  <thead>
+                    <tr>
+                      <th>Cal</th>
+                      <th>Protein</th>
+                      <th>Carbs</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>160</td>
+                      <td>5g</td>
+                      <td>22g</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </details>
+            </td>
+
+            <td>$3.00</td>
+            <td>$4.25</td>
+
+            <td>
+              <button
+                class="menu-item-btn"
+                data-name="Grilled Veggie"
+                data-price="3.00">
+                + Add $3.00
+              </button>
+            </td>
+          </tr>
+
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td colspan="4">Prices before tax</td>
+            <td class="mono">GHRCE-2026</td>
+          </tr>
+        </tfoot>
+
+      </table>
+
+    </div>
+
+    <!-- ORDER TICKET -->
+    <div
+      id="order-ticket"
+      class="card"
+      style="margin-top:1.2rem;">
+
+      <div class="ticket-inner">
+
+        <h4>🧾 Your Order Ticket</h4>
+
+        <ul id="ticket-list">
+          <li id="ticket-empty">
+            No tacos ordered yet — tap "Add" above.
+          </li>
+        </ul>
+
+        <div id="ticket-total" style="display:none;">
+          <span>Total</span>
+          <span id="ticket-total-amount">$0.00</span>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- TRIVIA -->
+  <section id="trivia" aria-labelledby="trivia-h">
+
+    <p class="eyebrow">03 / Trivia</p>
+
+    <h2 id="trivia-h">Taco Trivia</h2>
+
+    <div class="trivia-grid">
+
+      <div class="card">
+
+        <p>
+          Tacos have been documented for centuries, and the format —
+          a wrapped, portable meal — is basically the original semantic
+          element: a container built exactly for its content.
+          Click a fact below to reveal it.
+        </p>
+
+      </div>
+
+      <aside class="trivia-box" aria-label="Trivia facts">
+
+        <h3>
+          Did you know?
+          <span id="trivia-count" class="mono">
+            0/3 opened
+          </span>
+        </h3>
+
+        <details>
+          <summary>Where does "taco" come from?</summary>
+
+          <p>
+            Historians trace the word to Mexican silver miners,
+            who used "tacos" to describe small explosive charges
+            wrapped in paper — a shape later borrowed for food.
+          </p>
+        </details>
+
+        <details>
+          <summary>What's the tortilla's job?</summary>
+
+          <p>
+            It's structural, not just flavor — a good tortilla
+            holds everything together without tearing, the edible
+            equivalent of a well-nested HTML container.
+          </p>
+        </details>
+
+        <details>
+          <summary>Biggest taco ever made?</summary>
+
+          <p>
+            Teams in Mexico have built tacos measured in dozens
+            of meters long, assembled by entire towns for festival records.
+          </p>
+        </details>
+
+      </aside>
+
+    </div>
+
+  </section>
+
+  <!-- EXTRAS -->
+  <section id="extras" aria-labelledby="extras-h">
+
+    <p class="eyebrow">04 / Extras</p>
+
+    <h2 id="extras-h">Extras</h2>
+
+    <div class="card">
+
+      <p>
+        A quick audio cue from the kitchen bell, and a short video
+        of the griddle in action — both native HTML media elements,
+        no plugins required.
+      </p>
+
+      <div class="media-grid">
+
+        <div>
+
+          <p class="mono" style="font-size:.8rem;">
+            audio · kitchen ambience
+          </p>
+
+          <audio controls>
+            <source
+              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+              type="audio/mpeg">
+
+            Your browser doesn't support embedded audio.
+          </audio>
+
+        </div>
+
+        <div>
+
+          <p class="mono" style="font-size:.8rem;">
+            video · griddle demo
+          </p>
+
+          <video
+            controls
+            poster="https://images.unsplash.com/photo-1565299585323-38174c4a6471?w=600&h=340&fit=crop">
+
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4">
+
+            Your browser doesn't support embedded video.
+          </video>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEEDBACK -->
+  <section id="feedback" aria-labelledby="feedback-h">
+
+    <p class="eyebrow">05 / Feedback</p>
+
+    <h2 id="feedback-h">Feedback Form</h2>
+
+    <div class="card">
+
+      <form id="feedback-form" novalidate>
+
+        <fieldset>
+
+          <legend>Your details</legend>
+
+          <label for="name">Full name</label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Ada Lovelace"
+            required>
+
+          <label for="email">Email</label>
+
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            required>
+
+          <label for="visit-type">
+            How did you try TuteDude?
+          </label>
+
+          <select id="visit-type" name="visit-type">
+
+            <option value="dine-in">
+              Dine-in class
+            </option>
+
+            <option value="takeout">
+              Takeout tutorial
+            </option>
+
+            <option value="online">
+              Online course
+            </option>
+
+          </select>
+
+        </fieldset>
+
+        <fieldset>
+
+          <legend>Your feedback</legend>
+
+          <label for="message">
+            Tell us what you liked (or what needs work)
+          </label>
+
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="The nested tables really helped me understand..."
+            required></textarea>
+
+        </fieldset>
+
+        <button
+          type="submit"
+          class="submit-btn">
+          Submit feedback
+        </button>
+
+        <p
+          id="form-status"
+          role="status"></p>
+
+      </form>
+
+    </div>
+
+  </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer id="contact">
-    <h2>Contact Us</h2>
+
+  <div class="foot-inner">
+
     <address>
-        TuteDude<br>
-        123 Taco Street<br>
-        Taco Town, TX 75000<br>
-        Email: <a href="mailto:info@tutedude.com">info@tutedude.com</a>
+
+      <strong>TuteDude Demo Kitchen</strong><br>
+
+      G.H. Raisoni College of Engineering<br>
+
+      Nagpur, Maharashtra, India<br>
+
+      <a href="mailto:hello@tutedude.example">
+        hello@tutedude.example
+      </a>
+
     </address>
-    <p>&copy; <time datetime="2026">2026</time> TuteDude. All rights reserved.</p>
+
+    <div>
+
+      <p
+        class="mono"
+        style="font-size:.8rem;color:var(--mustard);">
+        Built for Assignment-01
+      </p>
+
+      <p
+        style="max-width:280px;font-size:.86rem;">
+        Every tag on this page was chosen on purpose —
+        nothing here is decorative HTML.
+      </p>
+
+    </div>
+
+  </div>
+
+  <small>
+    &copy;
+    <time
+      id="copyright-year"
+      datetime="2026">
+      2026
+    </time>
+    TuteDude. All rights reserved.
+  </small>
+
 </footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* =========================
+     CURRENT YEAR
+  ========================= */
+
+  var yearEl = document.getElementById('copyright-year');
+
+  var now = new Date();
+
+  yearEl.textContent = now.getFullYear();
+
+  yearEl.setAttribute(
+    'datetime',
+    String(now.getFullYear())
+  );
+
+
+  /* =========================
+     MOBILE NAVIGATION
+  ========================= */
+
+  var toggle = document.getElementById('nav-toggle');
+
+  var navList = document.querySelector(
+    '#site-nav ul'
+  );
+
+  toggle.addEventListener(
+    'click',
+    function(){
+
+      var isOpen =
+        navList.classList.toggle('open');
+
+      toggle.setAttribute(
+        'aria-expanded',
+        isOpen ? 'true' : 'false'
+      );
+
+    }
+  );
+
+
+  navList
+    .querySelectorAll('a')
+    .forEach(function(a){
+
+      a.addEventListener(
+        'click',
+        function(){
+
+          navList.classList.remove('open');
+
+          toggle.setAttribute(
+            'aria-expanded',
+            'false'
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =========================
+     TRIVIA COUNTER
+  ========================= */
+
+  var triviaDetails =
+    document.querySelectorAll(
+      '.trivia-box details'
+    );
+
+  var triviaCount =
+    document.getElementById(
+      'trivia-count'
+    );
+
+  var opened = new Set();
+
+
+  triviaDetails.forEach(
+    function(d, i){
+
+      d.addEventListener(
+        'toggle',
+        function(){
+
+          if(d.open){
+            opened.add(i);
+          }
+
+          triviaCount.textContent =
+            opened.size +
+            '/' +
+            triviaDetails.length +
+            ' opened';
+
+        }
+      );
+
+    }
+  );
+
+
+  /* =========================
+     ORDER TICKET
+  ========================= */
+
+  var order = [];
+
+  var ticketList =
+    document.getElementById(
+      'ticket-list'
+    );
+
+  var ticketTotalRow =
+    document.getElementById(
+      'ticket-total'
+    );
+
+  var ticketTotalAmount =
+    document.getElementById(
+      'ticket-total-amount'
+    );
+
+
+  function renderTicket(){
+
+    ticketList.innerHTML = '';
+
+
+    /* No items */
+
+    if(order.length === 0){
+
+      var li =
+        document.createElement('li');
+
+      li.id = 'ticket-empty';
+
+      li.textContent =
+        'No tacos ordered yet — tap "Add" above.';
+
+      /*
+       * FIXED ERROR:
+       * Original code ended with:
+       *
+       * ticketList.ap
+       *
+       * Correct code:
+       */
+
+      ticketList.appendChild(li);
+
+      ticketTotalRow.style.display =
+        'none';
+
+      return;
+    }
+
+
+    /* Items exist */
+
+    var total = 0;
+
+
+    order.forEach(
+      function(item){
+
+        var li =
+          document.createElement('li');
+
+        var nameSpan =
+          document.createElement('span');
+
+        var priceSpan =
+          document.createElement('span');
+
+
+        nameSpan.textContent =
+          item.name;
+
+        priceSpan.textContent =
+          '$' +
+          item.price.toFixed(2);
+
+
+        li.appendChild(nameSpan);
+
+        li.appendChild(priceSpan);
+
+        ticketList.appendChild(li);
+
+
+        total += item.price;
+
+      }
+    );
+
+
+    ticketTotalAmount.textContent =
+      '$' +
+      total.toFixed(2);
+
+    ticketTotalRow.style.display =
+      'flex';
+
+  }
+
+
+  /* =========================
+     ADD MENU ITEMS
+  ========================= */
+
+  document
+    .querySelectorAll('.menu-item-btn')
+    .forEach(function(button){
+
+      button.addEventListener(
+        'click',
+        function(){
+
+          var name =
+            button.getAttribute(
+              'data-name'
+            );
+
+          var price =
+            parseFloat(
+              button.getAttribute(
+                'data-price'
+              )
+            );
+
+
+          order.push({
+            name:name,
+            price:price
+          });
+
+
+          button.classList.add(
+            'added'
+          );
+
+          button.textContent =
+            '✓ Added';
+
+
+          setTimeout(
+            function(){
+
+              button.classList.remove(
+                'added'
+              );
+
+              button.textContent =
+                '+ Add $' +
+                price.toFixed(2);
+
+            },
+            800
+          );
+
+
+          renderTicket();
+
+        }
+      );
+
+    });
+
+
+  /* =========================
+     FEEDBACK FORM
+  ========================= */
+
+  var form =
+    document.getElementById(
+      'feedback-form'
+    );
+
+  var formStatus =
+    document.getElementById(
+      'form-status'
+    );
+
+
+  form.addEventListener(
+    'submit',
+    function(event){
+
+      event.preventDefault();
+
+
+      /* Check required fields */
+
+      if(!form.checkValidity()){
+
+        formStatus.textContent =
+          'Please complete all required fields correctly.';
+
+        formStatus.style.color =
+          'var(--chili)';
+
+        formStatus.classList.add(
+          'show'
+        );
+
+        form.reportValidity();
+
+        return;
+      }
+
+
+      var name =
+        document
+          .getElementById('name')
+          .value
+          .trim();
+
+
+      formStatus.textContent =
+        'Thanks, ' +
+        name +
+        '! Your feedback has been submitted successfully.';
+
+      formStatus.style.color =
+        'var(--teal)';
+
+      formStatus.classList.add(
+        'show'
+      );
+
+
+      form.reset();
+
+    }
+  );
+
+
+  /* =========================
+     INITIAL ORDER RENDER
+  ========================= */
+
+  renderTicket();
+
+})();
+</script>
 
 </body>
 </html>
