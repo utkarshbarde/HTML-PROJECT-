@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RailNex AI — Block Planning Decision Support (SIH 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="lmark">
+      <span class="dot"></span>
+      <h1 class="hd">RAILNEX AI</h1>
+    </div>
+    <div class="lsub">Block Planning Decision Support</div>
+    <div class="demo-cred-box">
+      <div class="dc-label">Demo credentials</div>
+      <div class="dc-row"><span>ID</span><span>r.officer</span></div>
+      <div class="dc-row"><span>Password</span><span>railnex2026</span></div>
+      <button type="button" onclick="fillDemoCreds()">Use demo credentials</button>
+    </div>
+    <div class="login-err" id="loginErr">Please enter a username and password.</div>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="e.g. r.officer" autocomplete="username">
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="Demo — any password works" autocomplete="current-password">
+    <button class="btn primary" onclick="attemptLogin()">Sign In</button>
+    <div class="login-hint">This is a prototype login — the demo ID/password above work, or any username + password signs you in as Railway Officer, Control Office.</div>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <aside id="sidebar">
+    <div id="brand">
+      <div class="mark">
+        <span class="dot"></span>
+        <h1 class="hd">RAILNEX AI</h1>
+      </div>
+      <div class="sub">Block Planning Decision Support</div>
+      <div class="ps">SIH 2026 · Problem Statement 26027</div>
+    </div>
+    <nav id="navlist"></nav>
+    <div style="padding:0 10px;">
+      <button class="signout-btn" onclick="signOut()">⎋ Sign Out</button>
+    </div>
+    <div id="sidebar-foot">
+      <span class="badge amber" style="margin-bottom:8px;">⚠ Prototype — simulated data</span>
+      <div style="margin-top:8px;">Not connected to live Indian Railways systems.</div>
+      <div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--line);">Advisory / decision-support only — not authorized to issue live signalling, interlocking or traction-power commands. Every action requires officer sanction.</div>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="topbar">
+      <div class="left">
+        <button class="btn ghost sm" id="menuToggle" style="display:none;">☰</button>
+        <div>
+          <h2 class="hd" id="viewTitle">Dashboard</h2>
+          <div class="clock mono" id="clockLine">—</div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="profile-chip">
+          <span class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c1.2-4 4-6 7-6s5.8 2 7 6"/></svg></span>
+          <span><div class="pn">Railway Officer</div><div class="pr">Control Office</div></span>
+        </div>
+        <button class="btn ghost" onclick="navigate('dashboard')">🏠 Dashboard</button>
+        <button class="btn ghost" id="presentBtn">▶ Presentation mode</button>
+        <button class="btn primary" id="simulateBtn">⚙ Run simulation</button>
+      </div>
+    </div>
+    <div id="content"></div>
+  </main>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3 id="modalTitle">Details</h3>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="present-overlay">
+  <div id="present-hd">
+    <div class="hd" style="font-size:18px;">RailNex AI — Presentation Mode</div>
+    <button class="btn ghost sm" onclick="closePresent()">✕ Exit</button>
+  </div>
+  <div id="present-body"></div>
+  <div id="present-ft">
+    <button class="btn ghost sm" id="pPrev">← Previous</button>
+    <span id="pDots" style="display:flex; gap:6px; align-items:center;"></span>
+    <button class="btn primary sm" id="pNext">Next →</button>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
